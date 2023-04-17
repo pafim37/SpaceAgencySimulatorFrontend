@@ -1,0 +1,53 @@
+.App 
+{
+    text-align: center;
+    background-color: #282c34;
+}
+
+.App-header
+{
+    background-color: #171b23;
+    height: 10vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.App-header h1
+{
+    margin: 0;
+    color:darkcyan;
+}
+
+.App-body 
+{
+    height: 85vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.App-footer 
+{
+    height: 5vh;
+    background-color: #171b23;
+}
+
+.App-left-panel, .App-right-panel
+{
+    height: 100%;
+    flex-basis: 10%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.App-center-panel
+{
+    height: 100%;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
