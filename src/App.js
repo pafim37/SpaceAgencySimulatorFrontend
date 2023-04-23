@@ -3,8 +3,9 @@ import './styles/App.css';
 import Board from './components/Board.tsx';
 import RightPanel from './components/RightPanel.tsx';
 import LeftPanel from './components/LeftPanel.tsx';
+import FetchDataComponent from './components/FetchDataComponent.tsx';
 
-function App() {
+const App = () => {
   const [orbits, setOrbits] = useState([]);
   const [data, setData] = useState(null);
 
@@ -36,10 +37,12 @@ function App() {
           <LeftPanel onUpdate={onUpdate} />
         </div>
         <div className="App-center-panel">
+          {/* TODO: Is it good place for FetchDataComponent? */}
+          <FetchDataComponent onDataFetch={setData}/> 
           <Board data={data}/>
         </div>
         <div className="App-right-panel">
-          <RightPanel onDataFetch={setData} />
+          <RightPanel data={data} />
         </div>
       </div>
       <div className='App-footer' />

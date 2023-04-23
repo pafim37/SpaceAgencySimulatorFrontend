@@ -1,49 +1,48 @@
 import React, { useEffect, useState } from 'react'
 import '../styles/Board.css';
-import Orbit from './Orbit.tsx';
+import DrawCanvasEllipse from './DrawCanvasEllipse.tsx';
+import DrawCanvasCircle from './DrawCanvasCircle.tsx';
 
 const Board = ({data}) => {
-    const [drawData, setDrawData] = useState([]);
+    const [circles, setCircles] = useState([]);
+    const [ellipses, setEllipses] = useState([]);
 
     useEffect(() => {
-        console.log("Board -> useEffect [data]: ", data);
         if (data !== null) {
+            console.log("data.bodies", data.bodies)
             const bodyList = data.bodies.map(
                 (body, key) => (
-                    <Orbit 
+                    <DrawCanvasCircle 
                     key={key+100}
                     name={body.name}
                     positionX={body.position.x}
                     positionY={body.position.y}
-                    radiusX={5}
-                    radiusY={5}
+                    radius={5} // body.radius
                     />
                 ));
-            
+            setCircles(bodyList);
             const orbitList = data.orbitsDescription.map(
                 (orbitDescription, key) => {
                     if (orbitDescription.orbit.orbitType === 0) {
                         return (
-                            <Orbit 
+                            <DrawCanvasCircle 
                             key={key}
                             name={orbitDescription.name+" Orbit"}
                             positionX={100}
                             positionY={100}
-                            radiusX={orbitDescription.orbit.radius}
-                            radiusY={orbitDescription.orbit.radius}
+                            radius={orbitDescription.orbit.radius}
                             />
                         )}
-                    else {
-                        return(<div key={key}/>)
-                    }
                 });
-            setDrawData([...orbitList, ...bodyList]);
-            console.log("drawData", drawData);
+            setEllipses(orbitList);
+            console.log("bodyList", bodyList);
+            console.log("circles", circles);
         }
     }, [data]);
     return (
         <div className="Board">
-            {drawData}
+            {circles}
+            {ellipses}
         </div>
     )
 }

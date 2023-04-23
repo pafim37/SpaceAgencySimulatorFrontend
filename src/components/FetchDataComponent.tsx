@@ -1,36 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
-export interface BodySystem {
-    bodies: Body[]
-}
-
-const FetchDataComponent = (onDataFetch) => {
-    const [data, setData] = useState<BodySystem>({bodies: []});
-    const [loading, setLoading] = useState(true)
+const FetchDataComponent = ({onDataFetch}) => {
 
     useEffect(() => {
         const dataFetch = async () => {
             try {
                 const response = await fetch("http://localhost:5000/body-system/test")
-                const data : BodySystem = await response.json();
-                setData(data);
-                setLoading(false);
+                const data : Body[] = await response.json();
+                onDataFetch(data);
+                console.log("Done");
             } 
             catch (error) {
                 console.error(error);
-                setLoading(false);
             }
         };
     
         dataFetch();
-        console.log("Done");
-      }, []);
-
-    useEffect(()=> {
-        if (data) {
-            onDataFetch(data);
-        }
-    }, [data, onDataFetch])
+      }, [onDataFetch]);
 
     return null;
 }
+
+export default FetchDataComponent;

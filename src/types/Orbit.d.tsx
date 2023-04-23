@@ -1,7 +1,7 @@
-declare interface OrbitProps {
+declare interface IOrbit {
     name: string,
     positionX: number,
     positionY: number,
-    radiusX: number,
-    radiusY: number
+    semiMajorAxis: number,
+    semiMinorAxis: number
 }
