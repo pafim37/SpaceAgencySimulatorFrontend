@@ -1,16 +1,7 @@
 import React, { useEffect } from 'react'
 import '../styles/Orbit.css'
 
-type OrbitProps = {
-    name: string,
-    positionX: number;
-    positionY: number;
-    radiusX: number;
-    radiusY: number;
-}
-
-function Orbit(props: OrbitProps) {
-    
+const Orbit = (props : OrbitProps) => {
     useEffect(() => {
         const canvas = document.getElementById(props.name) as HTMLCanvasElement;
         if(canvas !== null) {

@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import BodySystemDescriptor from './BodySystemDescriptor.tsx';
 
-interface BodySystem {
+export interface BodySystem {
     bodies: Body[]
 }
 
-const RightPanel = ({onDataFetch}) => {
-    const [data, setData] = useState<BodySystem>();
+const FetchDataComponent = (onDataFetch) => {
+    const [data, setData] = useState<BodySystem>({bodies: []});
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -15,7 +14,6 @@ const RightPanel = ({onDataFetch}) => {
                 const response = await fetch("http://localhost:5000/body-system/test")
                 const data : BodySystem = await response.json();
                 setData(data);
-                onDataFetch(data);
                 setLoading(false);
             } 
             catch (error) {
@@ -25,19 +23,14 @@ const RightPanel = ({onDataFetch}) => {
         };
     
         dataFetch();
+        console.log("Done");
       }, []);
 
-    return (
-        <div>
-            { !loading ? (
-                data.bodies.map((body, key) => (
-                    <BodySystemDescriptor key={key} body={body} />
-            ))
-            ) : (
-                <p>Loading data...</p>
-            )}
-        </div>
-      );
-}
+    useEffect(()=> {
+        if (data) {
+            onDataFetch(data);
+        }
+    }, [data, onDataFetch])
 
-export default RightPanel
+    return null;
+}

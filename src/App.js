@@ -4,12 +4,15 @@ import Board from './components/Board.tsx';
 import RightPanel from './components/RightPanel.tsx';
 import LeftPanel from './components/LeftPanel.tsx';
 
-
 function App() {
   const [orbits, setOrbits] = useState([]);
+  const [data, setData] = useState(null);
 
   useEffect(() => {
   }, [orbits, setOrbits]);
+
+  useEffect(() => {
+  }, [data, setData]);
 
   const onUpdate = (orbit) => {
     const index = orbits.findIndex(o => o.name === orbit.name);
@@ -22,7 +25,7 @@ function App() {
       setOrbits([...orbits, orbit]);
     }
   };
-  
+
   return (
     <div className='App'>
       <div className="App-header">
@@ -33,10 +36,10 @@ function App() {
           <LeftPanel onUpdate={onUpdate} />
         </div>
         <div className="App-center-panel">
-          <Board orbits={orbits}/>
+          <Board data={data}/>
         </div>
         <div className="App-right-panel">
-          <RightPanel />
+          <RightPanel onDataFetch={setData} />
         </div>
       </div>
       <div className='App-footer' />
