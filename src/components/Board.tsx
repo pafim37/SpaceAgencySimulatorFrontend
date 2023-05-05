@@ -12,30 +12,27 @@ const Board = ({data}) => {
             const bodyList = data?.bodies.map(
                 (body, key) => (
                     <DrawCanvasCircle 
-                    key={key+100}
+                    key={key}
                     name={body.name}
-                    positionX={body.position.x}
-                    positionY={body.position.y}
-                    radius={5} // body.radius
+                    centerX={body.position.x}
+                    centerY={body.position.y}
+                    radius={body.radius}
                     />
                     ));
-                    setCircles(bodyList);
-            if (data.orbits !== undefined && data.orbits !== null) {
-                const orbitList = data?.orbits.map(
-                    (orbit, key) => {
-                        return (
-                            <DrawCanvasEllipse 
-                            key={key}
-                            name={orbit.name +" Orbit"}
-                            positionX={100}
-                            positionY={100}
-                            semiMajorAxis={orbit.semiMajorAxis}
-                            semiMinorAxis={orbit.semiMinorAxis}
-                        />
-                        )}
-                        );
-                        setEllipses(orbitList);
-                    }
+                setCircles(bodyList);
+            console.log("Orbits", data?.orbits);
+            const orbitList = data?.orbits.map(
+                (orbit, key) => (
+                        <DrawCanvasEllipse 
+                        key={key}
+                        name={orbit.name + " Orbit"}
+                        centerX={orbit.centerX}
+                        centerY={orbit.centerY}
+                        semiMajorAxis={orbit.semiMajorAxis}
+                        semiMinorAxis={orbit.semiMinorAxis}
+                    />
+                ));
+            setEllipses(orbitList);
         }
     }, [data]);
     return (

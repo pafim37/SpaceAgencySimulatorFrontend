@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import '../styles/Orbit.css'
+import '../styles/Canvas.css'
 
-const DrawCanvasCircle = (props) => {
+export default function DrawCanvasCircle(props : ICanvasCircle) {
     useEffect(() => {
         const canvas = document.getElementById(props.name) as HTMLCanvasElement;
         if(canvas !== null) {
@@ -10,19 +10,12 @@ const DrawCanvasCircle = (props) => {
             const ctx = canvas.getContext('2d')
             ctx!.clearRect(0, 0, canvas.width, canvas.height);
             ctx!.beginPath();
-            ctx!.arc(props.positionX, props.positionY, props.radius, 0, 2 * Math.PI);
+            ctx!.arc(props.centerX, props.centerY, props.radius, 0, 2 * Math.PI);
             ctx!.stroke();
         }
     });
 
     return (
-        <canvas className='Canvas' style={styleDrawCanvasCircle} id={props.name} />
+        <canvas className='Canvas' id={props.name} />
     )
-}
-
-export default DrawCanvasCircle
-
-const styleDrawCanvasCircle = {
-    left: 0, 
-    top: 0 
 }

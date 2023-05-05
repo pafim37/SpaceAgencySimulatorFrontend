@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 
 const initialOrbit = {
     name: "O1",
-    positionX: 0,
-    positionY: 0,
+    centerX: 0,
+    centerY: 0,
     semiMajorAxis: 150,
     semiMinorAxis: 100
 }
@@ -13,11 +13,13 @@ export default function AddNewOrbit({orbitData, onUpdateOrbitData}) {
     
     const changeHandler = (event: any) => {
         event.preventDefault();
+        console.log("Change: ", event.target.name, event.target.value);
         setInputValues({...inputValues, [event.target.name]: event.target.value})
      }
 
     const clickHandler = (event: any) => {
         event.preventDefault();
+        console.log("NewOrbit: ", inputValues);
         const index = orbitData.findIndex(o => o.name === inputValues.name);
         if (index !== -1) {
             const updatedOrbits = [...orbitData];
@@ -32,14 +34,14 @@ export default function AddNewOrbit({orbitData, onUpdateOrbitData}) {
     return(
         <>
             <input type="text" name="name" placeholder='Name' value={inputValues.name} onChange={changeHandler} ></input>
-            <input type="number" name="positionX" placeholder='Position x' value={inputValues.positionX} onChange={clickHandler} ></input>
-            <input type="range" name="positionX" min="1" max="640" value={inputValues.positionX} onChange={clickHandler} ></input>
-            <input type="number" name="positionY" placeholder='Position y' value={inputValues.positionY} onChange={clickHandler}></input>
-            <input type="range" name="positionY" min="1" max="640" value={inputValues.positionY} onChange={clickHandler}></input>
-            <input type="number" name="radiusX" placeholder='Radius x' value={inputValues.semiMajorAxis} onChange={clickHandler}></input>
-            <input type="range" name="radiusX" min="1" max="640" value={inputValues.semiMajorAxis} onChange={clickHandler}></input>
-            <input type="number" name="radiusY" placeholder='Radius y' value={inputValues.semiMinorAxis} onChange={clickHandler}></input>
-            <input type="range" name="radiusY" min="1" max="640" value={inputValues.semiMinorAxis} onChange={clickHandler}></input>
+            <input type="number" name="centerX" placeholder='Center X' value={inputValues.centerX} onChange={clickHandler} ></input>
+            <input type="range" name="centerX" min="1" max="640" value={inputValues.centerX} onChange={changeHandler} ></input>
+            <input type="number" name="centerY" placeholder='Center y' value={inputValues.centerY} onChange={changeHandler}></input>
+            <input type="range" name="centerY" min="1" max="640" value={inputValues.centerY} onChange={changeHandler}></input>
+            <input type="number" name="semiMajorAxis" placeholder='Radius x' value={inputValues.semiMajorAxis} onChange={changeHandler}></input>
+            <input type="range" name="semiMajorAxis" min="1" max="640" value={inputValues.semiMajorAxis} onChange={changeHandler}></input>
+            <input type="number" name="semiMinorAxis" placeholder='Radius y' value={inputValues.semiMinorAxis} onChange={changeHandler}></input>
+            <input type="range" name="semiMinorAxis" min="1" max="640" value={inputValues.semiMinorAxis} onChange={changeHandler}></input>
             <button style={styleButton} onClick ={clickHandler}>Add new Orbit</button>
         </>
     );

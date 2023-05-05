@@ -1,6 +1,7 @@
 declare interface IBody {
     name: string,
     mass: number,
+    radius: number,
     position: IVector,
     velocity: IVector
 }
