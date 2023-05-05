@@ -61,7 +61,7 @@ export default function AddNewBody({bodyData , onUpdateBodyData} : AddNewBodyTyp
             <label>Mass</label>
             <input type="number" name="mass" placeholder='Mass' value={inputValues!.mass} onChange={changeBodyPropertiesHandler} ></input>
             <label>Radius</label>
-            <input type="number" name="radius" placeholder='Radius' value={inputValues!.velocity.y} onChange={changeBodyPropertiesHandler} ></input>
+            <input type="number" name="radius" placeholder='Radius' value={inputValues!.radius} onChange={changeBodyPropertiesHandler} ></input>
             <label>Position X</label>
             <input type="number" name="x" placeholder='PositionX' value={inputValues!.position.x} onChange={changeBodyPositionHandler} ></input>
             <label>Position Y</label>
