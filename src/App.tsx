@@ -5,27 +5,17 @@ import RightPanel from './components/RightPanel.tsx';
 import LeftPanel from './components/LeftPanel.tsx';
 import FetchDataComponent from './components/FetchDataComponent.tsx';
 
+type DataType = {
+  bodies: Array<BodyType>;
+  orbits: Array<IOrbit>;
+}
+
 const App = () => {
-  const [orbits, setOrbits] = useState([]);
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<DataType>();
 
   useEffect(() => {
-  }, [orbits, setOrbits]);
-
-  useEffect(() => {
+    console.log("Data", data);
   }, [data, setData]);
-
-  const onUpdate = (orbit) => {
-    const index = orbits.findIndex(o => o.name === orbit.name);
-    if (index !== -1) {
-      const updatedOrbits = [...orbits];
-      updatedOrbits[index] = orbit;
-      setOrbits(updatedOrbits);
-    }
-    else {
-      setOrbits([...orbits, orbit]);
-    }
-  };
 
   return (
     <div className='App'>
@@ -34,12 +24,12 @@ const App = () => {
       </div>
       <div className='App-body'>
         <div className="App-left-panel">
-          <LeftPanel onUpdate={onUpdate} />
+          <LeftPanel onUpdateData={setData} />
         </div>
         <div className="App-center-panel">
           {/* TODO: Is it good place for FetchDataComponent? */}
           <FetchDataComponent onDataFetch={setData}/> 
-          <Board data={data}/>
+          <Board data={data} />
         </div>
         <div className="App-right-panel">
           <RightPanel data={data} />

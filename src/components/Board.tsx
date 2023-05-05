@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import '../styles/Board.css';
-import DrawCanvasEllipse from './DrawCanvasEllipse.tsx';
 import DrawCanvasCircle from './DrawCanvasCircle.tsx';
+import DrawCanvasEllipse from './DrawCanvasEllipse.tsx';
 
 const Board = ({data}) => {
     const [circles, setCircles] = useState([]);
     const [ellipses, setEllipses] = useState([]);
 
     useEffect(() => {
-        if (data !== null) {
-            console.log("data.bodies", data.bodies)
-            const bodyList = data.bodies.map(
+        if (data !== null && data !== undefined) {
+            const bodyList = data?.bodies.map(
                 (body, key) => (
                     <DrawCanvasCircle 
                     key={key+100}
@@ -19,24 +18,24 @@ const Board = ({data}) => {
                     positionY={body.position.y}
                     radius={5} // body.radius
                     />
-                ));
-            setCircles(bodyList);
-            const orbitList = data.orbitsDescription.map(
-                (orbitDescription, key) => {
-                    if (orbitDescription.orbit.orbitType === 0) {
+                    ));
+                    setCircles(bodyList);
+            if (data.orbits !== undefined && data.orbits !== null) {
+                const orbitList = data?.orbits.map(
+                    (orbit, key) => {
                         return (
-                            <DrawCanvasCircle 
+                            <DrawCanvasEllipse 
                             key={key}
-                            name={orbitDescription.name+" Orbit"}
+                            name={orbit.name +" Orbit"}
                             positionX={100}
                             positionY={100}
-                            radius={orbitDescription.orbit.radius}
-                            />
+                            semiMajorAxis={orbit.semiMajorAxis}
+                            semiMinorAxis={orbit.semiMinorAxis}
+                        />
                         )}
-                });
-            setEllipses(orbitList);
-            console.log("bodyList", bodyList);
-            console.log("circles", circles);
+                        );
+                        setEllipses(orbitList);
+                    }
         }
     }, [data]);
     return (
@@ -47,4 +46,4 @@ const Board = ({data}) => {
     )
 }
 
-export default Board
+export default Board;
