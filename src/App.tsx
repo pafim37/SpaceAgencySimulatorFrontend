@@ -6,7 +6,7 @@ import LeftPanel from './components/LeftPanel.tsx';
 import FetchDataComponent from './components/FetchDataComponent.tsx';
 
 type DataType = {
-  bodies: Array<BodyType>;
+  bodies: Array<IBody>;
   orbits: Array<IOrbit>;
 }
 
@@ -14,7 +14,6 @@ const App = () => {
   const [data, setData] = useState<DataType>();
 
   useEffect(() => {
-    console.log("Data", data);
   }, [data, setData]);
 
   return (

@@ -1,21 +1,23 @@
 import React, { useState } from 'react'
 
+const initialOrbit = {
+    name: "O1",
+    positionX: 0,
+    positionY: 0,
+    semiMajorAxis: 150,
+    semiMinorAxis: 100
+}
+
 export default function AddNewOrbit({orbitData, onUpdateOrbitData}) {
-    const [inputValues, setInputValues] = useState<IOrbit>({
-        name: "O1",
-        positionX: 0,
-        positionY: 0,
-        semiMajorAxis: 150,
-        semiMinorAxis: 100,
-    });
+    const [inputValues, setInputValues] = useState<IOrbit>(initialOrbit);
     
-    const changeHandler = (e: any) => {
-        setInputValues({...inputValues, [e.target.name]: e.target.value})
+    const changeHandler = (event: any) => {
+        event.preventDefault();
+        setInputValues({...inputValues, [event.target.name]: event.target.value})
      }
 
-    const clickHandler = (e: any) => {
-        e.preventDefault();
-
+    const clickHandler = (event: any) => {
+        event.preventDefault();
         const index = orbitData.findIndex(o => o.name === inputValues.name);
         if (index !== -1) {
             const updatedOrbits = [...orbitData];

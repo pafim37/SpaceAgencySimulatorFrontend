@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
-const initialBody : BodyType = {
-    name: "",
+const initialBody : IBody = {
+    name: "xyz",
     mass: 10,
     position: {
         x: 10,
@@ -16,12 +16,12 @@ const initialBody : BodyType = {
 }
 
 type AddNewBodyType = {
-    bodyData : Array<BodyType>;
-    onUpdateBodyData(props : BodyType[]): void;
+    bodyData : Array<IBody>;
+    onUpdateBodyData(props : Array<IBody>): void;
 }
 
 export default function AddNewBody({bodyData , onUpdateBodyData} : AddNewBodyType) {
-    const [inputValues, setInputValues] = useState<BodyType>(initialBody);
+    const [inputValues, setInputValues] = useState<IBody>(initialBody);
 
     const changeBodyPropertiesHandler = (event: any) => {
         event.preventDefault();

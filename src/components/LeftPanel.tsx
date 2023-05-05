@@ -3,16 +3,14 @@ import AddNewBody from './AddNewBody.tsx';
 import AddNewOrbit from './AddNewOrbit.tsx';
 
 export default function LeftPanel( { onUpdateData } ) {
-    // TODO: decide on one BodyType or IBody 
-    const [bodyData, setBodyData] = useState<BodyType[]>([]);
-    const [orbitData, setOrbitData] = useState<IOrbit[]>([]);
+    const [bodyData, setBodyData] = useState<Array<IBody>>([]);
+    const [orbitData, setOrbitData] = useState<Array<IOrbit>>([]);
 
     useEffect(() => {
         const data = {
             bodies: bodyData,
             orbits: orbitData
         }
-        console.log("Data in LeftPanel: ", data);
         onUpdateData(data);
     }, [bodyData, orbitData])
     

@@ -8,7 +8,7 @@ const FetchDataComponent = ({onDataFetch}) => {
                 const response = await fetch("http://localhost:5000/body-system/test")
                 const data : Body[] = await response.json();
                 onDataFetch(data);
-                console.log("Done");
+                console.log("Data fetched sucessfully");
             } 
             catch (error) {
                 console.error(error);
