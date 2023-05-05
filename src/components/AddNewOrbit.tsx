@@ -13,13 +13,11 @@ export default function AddNewOrbit({orbitData, onUpdateOrbitData}) {
     
     const changeHandler = (event: any) => {
         event.preventDefault();
-        console.log("Change: ", event.target.name, event.target.value);
         setInputValues({...inputValues, [event.target.name]: event.target.value})
      }
 
     const clickHandler = (event: any) => {
         event.preventDefault();
-        console.log("NewOrbit: ", inputValues);
         const index = orbitData.findIndex(o => o.name === inputValues.name);
         if (index !== -1) {
             const updatedOrbits = [...orbitData];

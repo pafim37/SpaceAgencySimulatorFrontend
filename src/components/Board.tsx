@@ -20,7 +20,6 @@ const Board = ({data}) => {
                     />
                     ));
                 setCircles(bodyList);
-            console.log("Orbits", data?.orbits);
             const orbitList = data?.orbits.map(
                 (orbit, key) => (
                         <DrawCanvasEllipse 
