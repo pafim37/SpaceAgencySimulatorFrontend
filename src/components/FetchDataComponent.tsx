@@ -1,13 +1,15 @@
 import { useEffect } from 'react'
 
-const FetchDataComponent = ({onDataFetch}) => {
+const FetchDataComponent = ({data, setData}) => {
 
     useEffect(() => {
         const dataFetch = async () => {
             try {
                 const response = await fetch("http://localhost:5000/body-system/test")
-                const data : Body[] = await response.json();
-                onDataFetch(data);
+                const fetchedData = await response.json();
+                data.bodies = [...data.bodies, ...fetchedData.bodies];
+                data.orbits = [...data.orbits, ...fetchedData.orbitsDescription];
+                setData(data);
                 console.log("Data fetched sucessfully");
             } 
             catch (error) {
@@ -16,7 +18,7 @@ const FetchDataComponent = ({onDataFetch}) => {
         };
     
         dataFetch();
-      }, [onDataFetch]);
+      }, [setData]);
 
     return null;
 }

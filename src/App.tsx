@@ -32,7 +32,7 @@ export default function App() {
         </div>
         <div className="App-center-panel">
           {/* TODO: Is it good place for FetchDataComponent? */}
-          <FetchDataComponent onDataFetch={setData}/> 
+          <FetchDataComponent data={data} setData={setData}/> 
           <Board data={data} />
         </div>
         <div className="App-right-panel">
