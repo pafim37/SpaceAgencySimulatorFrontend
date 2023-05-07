@@ -8,7 +8,7 @@ const FetchDataComponent = ({data, setData}) => {
                 const response = await fetch("http://localhost:5000/body-system/test")
                 const fetchedData = await response.json();
                 data.bodies = [...data.bodies, ...fetchedData.bodies];
-                data.orbits = [...data.orbits, ...fetchedData.orbitsDescription];
+                data.orbits = [...data.orbits, ...fetchedData.orbitsDescription.map(a => a.orbit)];
                 setData(data);
                 console.log("Data fetched sucessfully");
             } 
