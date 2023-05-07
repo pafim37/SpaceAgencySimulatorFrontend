@@ -10,8 +10,13 @@ type DataType = {
   orbits: Array<IOrbit>;
 }
 
-const App = () => {
-  const [data, setData] = useState<DataType>();
+const initial = {
+  bodies: [],
+  orbits: []
+}
+
+export default function App() {
+  const [data, setData] = useState<DataType>(initial);
 
   useEffect(() => {
   }, [data, setData]);
@@ -23,7 +28,7 @@ const App = () => {
       </div>
       <div className='App-body'>
         <div className="App-left-panel">
-          <LeftPanel onUpdateData={setData} />
+          <LeftPanel data={data} onUpdateData={setData} />
         </div>
         <div className="App-center-panel">
           {/* TODO: Is it good place for FetchDataComponent? */}
@@ -31,12 +36,10 @@ const App = () => {
           <Board data={data} />
         </div>
         <div className="App-right-panel">
-          <RightPanel data={data} />
+          <RightPanel data={data} setData={setData}/>
         </div>
       </div>
       <div className='App-footer' />
     </div>
   );
 }
-
-export default App;

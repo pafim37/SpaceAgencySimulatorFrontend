@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import BodySystemDescriptor from './BodySystemDescriptor.tsx';
 
-export default function RightPanel({data}) {
+export default function RightPanel({data, setData}) {
     
     const [dataChange, setDataChange] = useState(false);
 
     function removeBody(bodyName : string) {
         const index = data.bodies.findIndex(b => b.name === bodyName);
         if (index !== -1) {
-            data.bodies.splice(index, 1);
+            const newBodies = [...data.bodies];
+            newBodies.splice(index, 1);
+            const newData = {...data, bodies: [...newBodies]};
+            setData(newData);
             setDataChange(!dataChange);
         }
     }
