@@ -28,7 +28,7 @@ export default function App() {
       </div>
       <div className='App-body'>
         <div className="App-left-panel">
-          <LeftPanel data={data} onUpdateData={setData} />
+          <LeftPanel data={data} setData={setData} />
         </div>
         <div className="App-center-panel">
           {/* TODO: Is it good place for FetchDataComponent? */}

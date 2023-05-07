@@ -8,7 +8,12 @@ const initialOrbit = {
     semiMinorAxis: 100
 }
 
-export default function AddNewOrbit({orbitData, onUpdateOrbitData}) {
+type AddNewOrbitType = {
+    orbitData : Array<IOrbit>;
+    onUpdateOrbitData(props : Array<IOrbit>): void;
+}
+
+export default function AddNewOrbit({orbitData, onUpdateOrbitData} : AddNewOrbitType) {
     const [inputValues, setInputValues] = useState<IOrbit>(initialOrbit);
     
     const changeHandler = (event: any) => {

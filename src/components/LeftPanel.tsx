@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import AddNewBody from './AddNewBody.tsx';
 import AddNewOrbit from './AddNewOrbit.tsx';
 
-export default function LeftPanel( {data, onUpdateData } ) {
+export default function LeftPanel( {data, setData } ) {
     const [bodyData, setBodyData] = useState<Array<IBody>>([]);
     const [orbitData, setOrbitData] = useState<Array<IOrbit>>([]);
 
@@ -11,7 +11,7 @@ export default function LeftPanel( {data, onUpdateData } ) {
             bodies: bodyData,
             orbits: orbitData
         }
-        onUpdateData(data);
+        setData(data);
         setBodyData(data.bodies);
     }, [bodyData, orbitData])
     
