@@ -1,6 +1,6 @@
 import React, { useRef, useEffect} from 'react'
 
-const Canvas = () => {
+export default function Canvas() {
   const canvasRef = useRef(null)
 
   useEffect(() => {
@@ -17,5 +17,3 @@ const Canvas = () => {
     
   return <canvas ref={canvasRef} />
 }
-
-export default Canvas

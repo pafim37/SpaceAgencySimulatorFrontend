@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 
 export default function BodySystemDescriptor({body, removeBody}) {
 
-    const clickHandler = (event: any) => {
+    const clickHandler = (event : React.MouseEvent<HTMLButtonElement>) => {
         removeBody(body.name);
     }
 

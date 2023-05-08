@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import BodySystemDescriptor from './BodySystemDescriptor.tsx';
 
-export default function RightPanel({data, setData}) {
+export default function RightPanel({data, setData} : IDataProps) {
     
     const [dataChange, setDataChange] = useState(false);
 

@@ -16,12 +16,7 @@ const initialBody : IBody = {
     }
 }
 
-type AddNewBodyType = {
-    bodyData : Array<IBody>;
-    onUpdateBodyData(props : Array<IBody>): void;
-}
-
-export default function AddNewBody({bodyData , onUpdateBodyData} : AddNewBodyType) {
+export default function AddNewBody({data , setData} : IDataProps) {
     const [inputValues, setInputValues] = useState<IBody>(initialBody);
 
     const changeBodyPropertiesHandler = (event: any) => {
@@ -43,14 +38,23 @@ export default function AddNewBody({bodyData , onUpdateBodyData} : AddNewBodyTyp
 
     const clickHandler = (event: any) => {
         event.preventDefault();
-        const index = bodyData.findIndex(b => b.name === inputValues.name);
+        const index = data.bodies.findIndex(b => b.name === inputValues.name);
         if (index !== -1) {
-            const updatedBody = [...bodyData];
+            const updatedBody = [...data.bodies];
             updatedBody[index] = inputValues;
-            onUpdateBodyData(updatedBody);
+            const newData = {
+                bodies: updatedBody,
+                orbits: data.orbits
+            }
+            setData(newData);
         }
         else {
-            onUpdateBodyData([...bodyData, inputValues]);
+            const updatedBody = [...data.bodies, inputValues];
+            const newData = {
+                bodies: updatedBody,
+                orbits: data.orbits
+            }
+            setData(newData);
         }
     }
 

@@ -1,24 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import AddNewBody from './AddNewBody.tsx';
 import AddNewOrbit from './AddNewOrbit.tsx';
 
-export default function LeftPanel( {data, setData } ) {
-    const [bodyData, setBodyData] = useState<Array<IBody>>([]);
-    const [orbitData, setOrbitData] = useState<Array<IOrbit>>([]);
-
-    useEffect(() => {
-        const data = {
-            bodies: bodyData,
-            orbits: orbitData
-        }
-        setData(data);
-        setBodyData(data.bodies);
-    }, [bodyData, orbitData])
+export default function LeftPanel( {data, setData } : IDataProps ) {
     
-    return(
-        <>
-            <AddNewOrbit orbitData={data.orbits} onUpdateOrbitData={setOrbitData}/>
-            <AddNewBody bodyData={data.bodies} onUpdateBodyData={setBodyData} />
-        </>
-    );
+    return(<>
+        <AddNewOrbit data={data} setData={setData}/>
+        <AddNewBody data={data} setData={setData} />
+    </>);
 }

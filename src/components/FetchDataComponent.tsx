@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-const FetchDataComponent = ({data, setData}) => {
+export default function FetchDataComponent({data, setData} : IDataProps) {
 
     useEffect(() => {
         const dataFetch = async () => {
@@ -8,8 +8,11 @@ const FetchDataComponent = ({data, setData}) => {
                 const response = await fetch("http://localhost:5000/body-system/test")
                 const fetchedData = await response.json();
                 data.bodies = [...data.bodies, ...fetchedData.bodies];
-                data.orbits = [...data.orbits, ...fetchedData.orbitsDescription.map(a => a.orbit)];
-                setData(data);
+                data.orbits = [...data.orbits, ...fetchedData.orbitsDescription.map(o => o.orbit)];
+                setData({
+                    bodies: data.bodies,
+                    orbits: data.orbits
+                });
                 console.log("Data fetched sucessfully");
             } 
             catch (error) {
@@ -22,5 +25,3 @@ const FetchDataComponent = ({data, setData}) => {
 
     return null;
 }
-
-export default FetchDataComponent;

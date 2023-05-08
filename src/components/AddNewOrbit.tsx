@@ -8,12 +8,7 @@ const initialOrbit = {
     semiMinorAxis: 100
 }
 
-type AddNewOrbitType = {
-    orbitData : Array<IOrbit>;
-    onUpdateOrbitData(props : Array<IOrbit>): void;
-}
-
-export default function AddNewOrbit({orbitData, onUpdateOrbitData} : AddNewOrbitType) {
+export default function AddNewOrbit({data, setData} : IDataProps) {
     const [inputValues, setInputValues] = useState<IOrbit>(initialOrbit);
     
     const changeHandler = (event: any) => {
@@ -23,14 +18,23 @@ export default function AddNewOrbit({orbitData, onUpdateOrbitData} : AddNewOrbit
 
     const clickHandler = (event: any) => {
         event.preventDefault();
-        const index = orbitData.findIndex(o => o.name === inputValues.name);
+        const index = data.orbits.findIndex(o => o.name === inputValues.name);
         if (index !== -1) {
-            const updatedOrbits = [...orbitData];
+            const updatedOrbits = [...data.orbits];
             updatedOrbits[index] = inputValues;
-            onUpdateOrbitData(updatedOrbits);
+            const newData = {
+                bodies: data.bodies,
+                orbits: updatedOrbits
+            }
+            setData(newData);
         }
         else {
-            onUpdateOrbitData([...orbitData, inputValues]);
+            const updatedOrbits = [...data.orbits, inputValues];
+            const newData = {
+                bodies: data.bodies,
+                orbits: updatedOrbits
+            }
+            setData(newData);
         }
     }
 
