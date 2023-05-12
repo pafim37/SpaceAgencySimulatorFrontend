@@ -5,18 +5,13 @@ import RightPanel from './components/RightPanel.tsx';
 import LeftPanel from './components/LeftPanel.tsx';
 import FetchDataComponent from './components/FetchDataComponent.tsx';
 
-type DataType = {
-  bodies: Array<IBody>;
-  orbits: Array<IOrbit>;
-}
-
 const initial = {
   bodies: [],
   orbits: []
 }
 
 export default function App() {
-  const [data, setData] = useState<DataType>(initial);
+  const [data, setData] = useState<IData>(initial);
 
   useEffect(() => {
   }, [data, setData]);
