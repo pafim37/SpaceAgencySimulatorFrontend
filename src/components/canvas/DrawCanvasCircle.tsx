@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import '../styles/Canvas.css'
+import '../../styles/Canvas.css'
 
-export default function DrawCanvasCircle(props : ICanvasCircle) {
+const DrawCanvasCircle = (props : ICanvasCircle) => {
     useEffect(() => {
         const canvas = document.getElementById(props.name) as HTMLCanvasElement;
         if(canvas !== null) {
@@ -19,3 +19,5 @@ export default function DrawCanvasCircle(props : ICanvasCircle) {
         <canvas className='Canvas' id={props.name} />
     )
 }
+
+export default DrawCanvasCircle;

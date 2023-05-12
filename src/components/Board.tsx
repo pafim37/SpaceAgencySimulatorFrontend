@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import '../styles/Board.css';
-import DrawCanvasCircle from './DrawCanvasCircle.tsx';
-import DrawCanvasEllipse from './DrawCanvasEllipse.tsx';
+import DrawCanvasCircle from './canvas/DrawCanvasCircle.tsx';
+import DrawCanvasEllipse from './canvas/DrawCanvasEllipse.tsx';
 
 const Board = ({data}) => {
     const [circles, setCircles] = useState([]);

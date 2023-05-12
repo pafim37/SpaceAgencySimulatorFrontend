@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import '../styles/Canvas.css'
+import '../../styles/Canvas.css'
 
 export default function DrawCanvasEllipse(props : ICanvasEllipse) {
     useEffect(() => {

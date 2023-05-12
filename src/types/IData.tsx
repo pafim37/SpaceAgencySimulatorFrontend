@@ -1,6 +1,6 @@
 declare interface IData {
     bodies: Array<IBody>,
-    orbits: Array<IBody>
+    orbits: Array<IOrbit>
 }
 
 declare interface IDataProps {

@@ -16,8 +16,19 @@ const initialBody : IBody = {
     }
 }
 
-export default function AddNewBody({data , setData} : IDataProps) {
+const AddNewBody = ({data , setData} : IDataProps) => {
     const [inputValues, setInputValues] = useState<IBody>(initialBody);
+
+    const exportData = async (newBody : IBody) => {
+        console.log("Data",data.bodies);
+        const response = await fetch("http://localhost:5000/body-system/", 
+        {
+          method: "POST",
+          headers: {"Content-Type":"application/json"},
+          body: JSON.stringify(newBody)
+        })
+        console.log("response", await response.json());
+      };
 
     const changeBodyPropertiesHandler = (event: any) => {
         event.preventDefault();
@@ -56,6 +67,7 @@ export default function AddNewBody({data , setData} : IDataProps) {
             }
             setData(newData);
         }
+        exportData(inputValues);
     }
 
     return(
@@ -80,3 +92,5 @@ export default function AddNewBody({data , setData} : IDataProps) {
         </div>
     );
 }
+
+export default AddNewBody;

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 
-export default function BodySystemDescriptor({body, removeBody}) {
+const BodySystemDescriptor = ({body, removeBody}) => {
 
-    const clickHandler = (event : React.MouseEvent<HTMLButtonElement>) => {
+    const clickHandler = () => {
         removeBody(body.name);
     }
 
@@ -20,6 +20,8 @@ export default function BodySystemDescriptor({body, removeBody}) {
         </div>
     );
 }
+
+export default BodySystemDescriptor;
 
 const styleBody = {
     color: '#30c9b0'
