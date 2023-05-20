@@ -1,42 +1,35 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import axios from "axios";
 
-const DataButtonGroup = ({data, setData } : IDataProps ) => {
-    
-    const exportData = async () => {
-        const response = await fetch("http://localhost:5000/body-system/", 
-        {
-          method: "POST",
-          headers: {"Content-Type":"application/json"},
-          body: JSON.stringify(data.bodies)
-        })
-        console.log("response", await response.json());
-      };
-    
+const DataButtonGroup = ( {data , setData} : IDataProps)  => {
+    useEffect(() => {
+        importData();
+    }, []);
+
     const importData = async () => {
-        try {
-            const response = await fetch("http://localhost:5000/body-system/",
-            {
-              method: "GET"
-            })
-            const fetchedData = await response.json();
-            data.bodies = [...data.bodies, ...fetchedData.bodies];
-            data.orbits = [...data.orbits, ...fetchedData.orbitsDescription.map(o => o.orbit)];
+        console.log("Importing data from the database...");
+        const options = {
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            }
+        };
+        axios.get("http://localhost:5000/body-system/", options)
+            .then(response => {
+            data.bodies = [...data.bodies, ...response.data.bodies];
+            data.orbits = [...data.orbits, ...response.data.orbitsDescription.map(o => o.orbit)];
             setData({
                 bodies: data.bodies,
                 orbits: data.orbits
             });
-            console.log("Data fetched sucessfully");
-        } 
-        catch (error) {
-            console.error(error);
-        }
-    }
+            response.status===200 && console.log("Data imported sucessfully");
 
+        })
+        .catch(err => console.error(err));
+    }; 
+    
     return(
         <div style={styleButtons}>
-            <button onClick={exportData}> 
-                Save
-            </button>
             <button onClick={importData}> 
                 Get
             </button>

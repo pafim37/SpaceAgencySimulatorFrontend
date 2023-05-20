@@ -2,10 +2,10 @@ import React from 'react'
 import '../../styles/App.css';
 import AddNewBody from '../AddNewBody.tsx';
 
-const LeftPanel = ( {data, setData } : IDataProps ) => {
+const LeftPanel : React.FC<{showedData : IBody}> = ( { showedData } ) => {
     return(
         <div className="App-left-panel">
-            <AddNewBody data={data} setData={setData} />
+            <AddNewBody showedData={showedData}/>
         </div>
     );
 }

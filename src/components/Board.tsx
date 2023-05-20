@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import '../styles/Board.css';
 import DrawCanvasCircle from './canvas/DrawCanvasCircle.tsx';
 import DrawCanvasEllipse from './canvas/DrawCanvasEllipse.tsx';
+import { DataContext } from './DataContextProvider';
 
-const Board = ({data}) => {
+const Board = () => {
+    const { data } = useContext(DataContext);
+    const OX : number = 320;
+    const OY : number = 240;
     const [circles, setCircles] = useState([]);
     const [ellipses, setEllipses] = useState([]);
 
@@ -12,26 +16,28 @@ const Board = ({data}) => {
             const bodyList = data?.bodies.map(
                 (body, key) => (
                     <DrawCanvasCircle 
-                    key={key}
                     name={body.name}
-                    centerX={body.position.x}
-                    centerY={body.position.y}
+                    centerX={parseInt(body.position.x) + OX}
+                    centerY={parseInt(body.position.y)  + OY}
                     radius={body.radius}
+                    key={key + "Body"}
                     />
                     ));
                 setCircles(bodyList);
+                console.log(bodyList);
             const orbitList = data?.orbits.map(
-                (orbit, key) => (
+                (orbit : IOrbit, key) => (
                         <DrawCanvasEllipse 
                         key={key}
                         name={orbit.name + " Orbit"}
-                        centerX={orbit.centerX}
-                        centerY={orbit.centerY}
+                        centerX={parseInt(orbit.centerX) + OX}
+                        centerY={parseInt(orbit.centerY) + OY}
                         semiMajorAxis={orbit.semiMajorAxis}
                         semiMinorAxis={orbit.semiMinorAxis}
                     />
                 ));
             setEllipses(orbitList);
+            console.log(orbitList);
         }
     }, [data]);
     return (

@@ -1,25 +1,28 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import '../../styles/App.css';
 import RightPanel from './RightPanel.tsx';
 import LeftPanel from './LeftPanel.tsx';
 import CenterPanel from './CenterPanel.tsx';
+import { DataContextProvider } from '../DataContextProvider'
 
-const initial = {
-    bodies: [],
-    orbits: []
-  }
+const initialBody : IBody = {
+    name: "",
+    mass: 10,
+    radius: 5,
+    position: { x: 0, y: 0, z: 0 },
+    velocity: { x: 0, y: 0, z: 0 }
+}
 
 const Content = () => {
-    const [data, setData] = useState<IData>(initial);
-
-    useEffect(() => {
-    }, [data, setData]);
-
+    const [showedData, setShowedData] = useState<IBody>(initialBody);
+    
     return(
         <div className='App-body'>
-            <LeftPanel data={data} setData={setData} />
-            <CenterPanel data={data} setData={setData} />
-            <RightPanel data={data} setData={setData} />
+            <DataContextProvider>
+                <LeftPanel showedData={showedData}/>
+                <CenterPanel />
+                <RightPanel setShowedData={setShowedData} />
+            </DataContextProvider>
         </div>
     )
 }
