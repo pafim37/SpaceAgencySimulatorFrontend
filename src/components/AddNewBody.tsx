@@ -20,9 +20,9 @@ const AddNewBody = ({ showedData }) => {
             console.log("data from post:", response.data);
             data.bodies = [...data.bodies, ...response.data.bodies];
             data.orbits = [...data.orbits, ...response.data.orbitsDescription.map(o => o.orbit)];
-            // data.orbits[1].center = response.data.orbitsDescription[1].center;
+            var uniqueBodies = data.bodies.filter( (body, ind) => ind === data.bodies.findIndex( bodyDuplicate => bodyDuplicate.name === body.name && bodyDuplicate.name === body.name))
             setData({
-                bodies: data.bodies,
+                bodies: uniqueBodies,
                 orbits: data.orbits
             });
             response.status===200 && console.log("Data exported sucessfully")
