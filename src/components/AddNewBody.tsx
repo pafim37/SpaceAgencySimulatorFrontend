@@ -13,13 +13,19 @@ const AddNewBody = ({ showedData }) => {
         setInputValues(showedDataState);
     }, [showedDataState, setShowedDataState, showedData]);
 
-    const exportData = async(data : IData) => {
-        console.log("Exporting data to the database...");
-        axiosBase.post("body-system/", data)
+    const exportData = async(bodiesToSend : Array<IBody>) => {
+        console.log("Exporting data to the database...", bodiesToSend);
+        axiosBase.post("body-system/", bodiesToSend)
         .then(response => {
-            console.log("data in post:", response.data);
-            setData(response.data);
-            response.status===200 && console.log("Data exported sucessfully");
+            console.log("data from post:", response.data);
+            data.bodies = [...data.bodies, ...response.data.bodies];
+            data.orbits = [...data.orbits, ...response.data.orbitsDescription.map(o => o.orbit)];
+            // data.orbits[1].center = response.data.orbitsDescription[1].center;
+            setData({
+                bodies: data.bodies,
+                orbits: data.orbits
+            });
+            response.status===200 && console.log("Data exported sucessfully")
         })
         .catch((err : Error)=> console.error(err));
     }
@@ -52,7 +58,7 @@ const AddNewBody = ({ showedData }) => {
                 orbits: data.orbits
             }
             setData(newData);
-            exportData(newData);
+            exportData(updatedBody);
         }
         else {
             const updatedBody = [...data.bodies, inputValues];
@@ -61,7 +67,7 @@ const AddNewBody = ({ showedData }) => {
                 orbits: data.orbits
             }
             setData(newData);
-            exportData(newData);
+            exportData(updatedBody);
         }
     }
 
