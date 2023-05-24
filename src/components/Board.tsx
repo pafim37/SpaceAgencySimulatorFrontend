@@ -6,12 +6,13 @@ import { DataContext } from './DataContextProvider';
 
 const Board = () => {
     const { data } = useContext(DataContext);
-    const OX : number = 320;
+    const OX : number = 319;
     const OY : number = 240;
     const [circles, setCircles] = useState([]);
     const [ellipses, setEllipses] = useState([]);
 
     useEffect(() => {
+        console.log("Orbits to draw: ", data.orbits.filter(o => o.orbitType===1));
         if (data !== null && data !== undefined) {
             const bodyList = data?.bodies.map(
                 (body, key) => (
@@ -25,19 +26,20 @@ const Board = () => {
                     ));
                 setCircles(bodyList);
                 console.log(bodyList);
-            const orbitList = data?.orbits.map(
-                (orbit : IOrbit, key) => (
-                        <DrawCanvasEllipse 
-                        key={key}
-                        name={orbit.name + " Orbit"}
-                        centerX={parseInt(orbit.centerX) + OX}
-                        centerY={parseInt(orbit.centerY) + OY}
-                        semiMajorAxis={orbit.semiMajorAxis}
-                        semiMinorAxis={orbit.semiMinorAxis}
+            console.log("data.orbits", data);
+            const orbitList = data.orbits.filter(o => o.orbitType===1).map(
+                (orbit, key) => (
+                    <DrawCanvasEllipse 
+                    key={key}
+                    name={"Orbit" + key}
+                    centerX={OX + orbit.center.x}
+                    centerY={OY + orbit.center.y}
+                    semiMajorAxis={orbit.semiMajorAxis}
+                    semiMinorAxis={orbit.semiMinorAxis}
                     />
                 ));
             setEllipses(orbitList);
-            console.log(orbitList);
+            console.log("orbitList",orbitList);
         }
     }, [data]);
     return (

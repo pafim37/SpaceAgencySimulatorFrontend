@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import '../styles/LabelInputPair.css';
-import axios from "axios";
+import axiosBase from "../axiosBase.jsx";
 import { DataContext } from './DataContextProvider';
 
 const AddNewBody = ({ showedData }) => {
@@ -13,19 +13,15 @@ const AddNewBody = ({ showedData }) => {
         setInputValues(showedDataState);
     }, [showedDataState, setShowedDataState, showedData]);
 
-    const exportData = async(data) => {
+    const exportData = async(data : IData) => {
         console.log("Exporting data to the database...");
-        const options = {
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            }
-        };
-        axios.post("http://localhost:5000/body-system/", data, options)
+        axiosBase.post("body-system/", data)
         .then(response => {
+            console.log("data in post:", response.data);
+            setData(response.data);
             response.status===200 && console.log("Data exported sucessfully");
         })
-        .catch(err => console.error(err));
+        .catch((err : Error)=> console.error(err));
     }
 
     const changeBodyPropertiesHandler = (event: any) => {
@@ -49,14 +45,14 @@ const AddNewBody = ({ showedData }) => {
         event.preventDefault();
         const index = data.bodies.findIndex(b => b.name === inputValues.name);
         if (index !== -1) {
-            const updatedBody = [...data.bodies];
+            const updatedBody : Array<IBody> = [...data.bodies];
             updatedBody[index] = inputValues;
             const newData = {
                 bodies: updatedBody,
                 orbits: data.orbits
             }
             setData(newData);
-            exportData(updatedBody);
+            exportData(newData);
         }
         else {
             const updatedBody = [...data.bodies, inputValues];
@@ -65,7 +61,7 @@ const AddNewBody = ({ showedData }) => {
                 orbits: data.orbits
             }
             setData(newData);
-            exportData(updatedBody);
+            exportData(newData);
         }
     }
 

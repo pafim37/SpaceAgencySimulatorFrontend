@@ -1,6 +1,6 @@
 import React, { useState, useContext }  from 'react';
 import BodySystemDescriptor from './BodySystemDescriptor';
-import axios from 'axios';
+import axiosBase from '../axiosBase.jsx';
 import { DataContext } from './DataContextProvider';
 
 const BodyList = ({setShowedData}) => {
@@ -9,13 +9,7 @@ const BodyList = ({setShowedData}) => {
 
     const sendRequest = async (name : string) => {
         console.log("Exporting data to the database...");
-        const options = {
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            }
-        };
-        axios.delete("http://localhost:5000/body-system/", {headers: options.headers, data: name})
+        axiosBase.delete("body-system/", {data: name})
         .then(response => {
             response.status===204 && console.log("Data deleted sucessfully");
         })

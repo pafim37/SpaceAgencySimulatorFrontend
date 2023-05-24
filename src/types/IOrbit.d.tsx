@@ -1,7 +1,7 @@
 declare interface IOrbit {
     name: string,
-    centerX: number,
-    centerY: number,
+    orbitType: number,
+    center: IVector,
     semiMajorAxis: number,
     semiMinorAxis: number
 }
