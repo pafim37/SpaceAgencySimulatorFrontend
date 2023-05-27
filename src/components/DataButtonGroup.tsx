@@ -10,8 +10,9 @@ const DataButtonGroup = ( {data , setData} : IDataProps)  => {
         console.log("Importing data from the database...");
         axiosBase.get("body-system/")
             .then(response => {
+            console.log("GET: Data response: ", response.data);
             data.bodies = [...data.bodies, ...response.data.bodies];
-            data.orbits = [...data.orbits, ...response.data.orbitsDescription.map(o => o.orbit)];
+            data.orbits = [...data.orbits, ...response.data.orbits];
             var uniqueBodies = data.bodies.filter( (body, ind) => ind === data.bodies.findIndex( bodyDuplicate => bodyDuplicate.name === body.name && bodyDuplicate.name === body.name))
             setData({
                 bodies: uniqueBodies,

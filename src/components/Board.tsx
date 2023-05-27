@@ -6,12 +6,13 @@ import { DataContext } from './DataContextProvider';
 
 const Board = () => {
     const { data } = useContext(DataContext);
-    const OX : number = 319;
+    const OX : number = 320;
     const OY : number = 240;
     const [circlesCanvas, setCirclesCanvas] = useState([]);
     const [ellipsesCanvas, setEllipsesCanvas] = useState([]);
 
     const createCirclesCanvas = (bodies : Array<IBody>) => {
+        console.log("Bodies to draw", bodies);
         const bodyList = bodies.map(
             (body, key) => (
                 <DrawCanvasCircle 
@@ -26,17 +27,19 @@ const Board = () => {
     };
 
     const createEllipsesCanvas = (orbits : Array<IOrbit>) => {
+        console.log("Orbits to draw", orbits);
         const orbitList = orbits.filter(o => o.orbitType===1).map(
             (orbit, key) => (
                 <DrawCanvasEllipse 
                 key={key}
-                name={"Orbit" + key}
+                name={orbit.name + "_orbit"}
                 centerX={OX + orbit.center.x}
                 centerY={OY + orbit.center.y}
                 semiMajorAxis={orbit.semiMajorAxis}
                 semiMinorAxis={orbit.semiMinorAxis}
                 />
             ));
+        console.log("Orbits list to draw", orbitList);
         setEllipsesCanvas(orbitList);
     }
 

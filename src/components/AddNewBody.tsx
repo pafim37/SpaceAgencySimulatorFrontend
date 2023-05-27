@@ -17,10 +17,11 @@ const AddNewBody = ({ showedData }) => {
         console.log("Exporting data to the database...", bodiesToSend);
         axiosBase.post("body-system/", bodiesToSend)
         .then(response => {
-            console.log("data from post:", response.data);
-            data.bodies = [...data.bodies, ...response.data.bodies];
-            data.orbits = [...data.orbits, ...response.data.orbitsDescription.map(o => o.orbit)];
-            var uniqueBodies = data.bodies.filter( (body, ind) => ind === data.bodies.findIndex( bodyDuplicate => bodyDuplicate.name === body.name && bodyDuplicate.name === body.name))
+            console.log("POST: data response:", response.data);
+            data.bodies = [...response.data.bodies];
+            data.orbits = [...response.data.orbits];
+            console.log("Oczym mowa", data);
+            var uniqueBodies = data.bodies.filter( (body, index) => index === data.bodies.findIndex( bodyDuplicate => bodyDuplicate.name === body.name && bodyDuplicate.name === body.name))
             setData({
                 bodies: uniqueBodies,
                 orbits: data.orbits
