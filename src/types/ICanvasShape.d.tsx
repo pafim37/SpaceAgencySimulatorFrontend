@@ -12,3 +12,11 @@ declare interface ICanvasEllipse {
     semiMajorAxis: number,
     semiMinorAxis: number
 }
+
+declare interface ICanvasHyperbola {
+    name: string,
+    centerX: number,
+    centerY: number,
+    semiMajorAxis: number,
+    semiMinorAxis: number,
+}
