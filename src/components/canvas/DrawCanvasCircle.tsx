@@ -2,12 +2,15 @@ import React, { useEffect } from 'react'
 import '../../styles/Canvas.css'
 
 const DrawCanvasCircle = (props : ICanvasCircle) => {
+    const width = props.width;
+    const height = props.height;
+    const color = props.color
+    
     useEffect(() => {
         const canvas = document.getElementById(props.name) as HTMLCanvasElement;
-        const color = "#770000";
         if(canvas !== null) {
-            canvas.width = 640;
-            canvas.height = 480;
+            canvas.width = width;
+            canvas.height = height;
             const ctx = canvas.getContext('2d')
             ctx.strokeStyle = color;
             ctx!.clearRect(0, 0, canvas.width, canvas.height);

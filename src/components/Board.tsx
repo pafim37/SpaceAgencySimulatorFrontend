@@ -7,6 +7,10 @@ import DrawCanvasHyperbola from './canvas/DrawCanvasHyperbola.tsx';
 
 const Board = () => {
     const { data } = useContext(DataContext);
+    const width : number = 640;
+    const height : number = 480;
+    const orbitColor : string = "#000099";
+    const bodyColor : string = "#770000";
     const OX : number = 320;
     const OY : number = 240;
     const [circlesCanvas, setCirclesCanvas] = useState([]);
@@ -18,6 +22,9 @@ const Board = () => {
         const bodyList = bodies.map(
             (body, key) => (
                 <DrawCanvasCircle 
+                width={width}
+                height={height}
+                color={bodyColor}
                 name={body.name}
                 centerX={parseInt(body.position.x) + OX}
                 centerY={OY - parseInt(body.position.y)}
@@ -33,6 +40,9 @@ const Board = () => {
         const orbitList = orbits.filter(o => o.orbitType===1).map(
             (orbit, key) => (
                 <DrawCanvasEllipse 
+                width={width}
+                height={height}
+                color={orbitColor}
                 key={key}
                 name={orbit.name + "_orbit"}
                 centerX={OX - orbit.center.x}
@@ -51,6 +61,9 @@ const Board = () => {
         const orbitList = orbits.filter(o => o.orbitType===3).map(
             (orbit, key) => (
                 <DrawCanvasHyperbola 
+                width={width}
+                height={height}
+                color={orbitColor}
                 key={key}
                 name={orbit.name + "_orbit"}
                 centerX={orbit.center.x}
