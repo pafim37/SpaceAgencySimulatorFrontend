@@ -10,7 +10,8 @@ declare interface ICanvasEllipse {
     centerX: number,
     centerY: number,
     semiMajorAxis: number,
-    semiMinorAxis: number
+    semiMinorAxis: number,
+    rotation: number
 }
 
 declare interface ICanvasHyperbola {
@@ -19,4 +20,5 @@ declare interface ICanvasHyperbola {
     centerY: number,
     semiMajorAxis: number,
     semiMinorAxis: number,
+    rotation: number
 }

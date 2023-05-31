@@ -20,7 +20,7 @@ const Board = () => {
                 <DrawCanvasCircle 
                 name={body.name}
                 centerX={parseInt(body.position.x) + OX}
-                centerY={parseInt(body.position.y)  + OY}
+                centerY={OY - parseInt(body.position.y)}
                 radius={body.radius}
                 key={"Body" + key}
                 />
@@ -35,10 +35,11 @@ const Board = () => {
                 <DrawCanvasEllipse 
                 key={key}
                 name={orbit.name + "_orbit"}
-                centerX={OX + orbit.center.x}
-                centerY={OY + orbit.center.y}
+                centerX={OX - orbit.center.x}
+                centerY={OY - orbit.center.y}
                 semiMajorAxis={orbit.semiMajorAxis}
                 semiMinorAxis={orbit.semiMinorAxis}
+                rotation={orbit.rotation}
                 />
             ));
         console.log("Orbits list to draw", orbitList);
@@ -56,6 +57,7 @@ const Board = () => {
                 centerY={orbit.center.y}
                 semiMajorAxis={orbit.semiMajorAxis}
                 semiMinorAxis={orbit.semiMinorAxis}
+                rotation={orbit.rotation}
                 />
             ));
         console.log("Orbits list to draw", orbitList);

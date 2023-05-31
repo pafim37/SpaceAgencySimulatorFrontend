@@ -15,19 +15,22 @@ const DrawCanvasHyperbola = (props : ICanvasHyperbola) => {
             ctx!.clearRect(0, 0, canvas.width, canvas.height);
             ctx!.beginPath();
 
-            const step = 0.001;
+            const step = 0.1;
             const startAngle = - 2 * Math.PI;
             const endAngle = 2 * Math.PI;
 
-            console.log("center", props.centerX, props.centerY);
+            const a = props.rotation; 
+            const cx = OX + Math.cos(a) * props.centerX; // works for vector center = (r - a, r-a , 0)
+            const cy = OY + Math.sin(a) * props.centerY - 2 * Math.sin(a) * props.centerX; // works for vector center = (r - a, r-a , 0)
+
+            console.log("center", cx, cy, a * 180 / Math.PI);
             console.log("a", props.semiMajorAxis);
             console.log("b", props.semiMinorAxis);
-            
-            
-            for (let angle = startAngle; angle < endAngle; angle += step) {
-                const x = OX + props.centerX - props.semiMajorAxis + props.semiMajorAxis * Math.cosh(angle);
-                const y = OY + props.semiMinorAxis * Math.sinh(angle);
-                if (angle === startAngle) {
+            for (let t = startAngle; t < endAngle; t += step) {
+                const x = cx + (props.semiMajorAxis * Math.cosh(t) * Math.cos(a)) + (props.semiMinorAxis * Math.sinh(t) * Math.sin(a)); // chat gpt
+                const y = cy - (props.semiMajorAxis * Math.cosh(t) * Math.sin(a)) + (props.semiMinorAxis * Math.sinh(t) * Math.cos(a)); // chat gpt
+
+                if (t === startAngle) {
                   ctx.moveTo(x, y);
                 } else {
                   ctx.lineTo(x, y);

@@ -12,7 +12,7 @@ export default function DrawCanvasEllipse(props : ICanvasEllipse) {
             ctx.strokeStyle = color;
             ctx!.clearRect(0, 0, canvas.width, canvas.height);
             ctx!.beginPath();
-            ctx!.ellipse(props.centerX, props.centerY, props.semiMajorAxis, props.semiMinorAxis, 0, 0, 2 * Math.PI);
+            ctx!.ellipse(props.centerX, props.centerY, props.semiMajorAxis, props.semiMinorAxis, props.rotation, 0, 2 * Math.PI);
             ctx!.stroke();
         }
     });
