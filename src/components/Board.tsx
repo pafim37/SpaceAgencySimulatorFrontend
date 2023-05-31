@@ -13,11 +13,12 @@ const Board = () => {
     const bodyColor : string = "#770000";
     const OX : number = 320;
     const OY : number = 240;
-    const [circlesCanvas, setCirclesCanvas] = useState([]);
+    const [bodyCanvas, setBodyCanvas] = useState([]);
     const [ellipsesCanvas, setEllipsesCanvas] = useState([]);
+    const [circlesCanvas, setCirclesCanvas] = useState([]);
     const [hyperbolaCanvas, setHyperbolaCanvas] = useState([]);
 
-    const createCirclesCanvas = (bodies : Array<IBody>) => {
+    const createBodyCanvas = (bodies : Array<IBody>) => {
         console.log("Bodies to draw", bodies);
         const bodyList = bodies.map(
             (body, key) => (
@@ -26,17 +27,37 @@ const Board = () => {
                 height={height}
                 color={bodyColor}
                 name={body.name}
-                centerX={parseInt(body.position.x) + OX}
-                centerY={OY - parseInt(body.position.y)}
+                centerX={body.position.x + OX}
+                centerY={OY - body.position.y}
                 radius={body.radius}
                 key={"Body" + key}
+                isFilled={true}
                 />
                 ));
-            setCirclesCanvas(bodyList);
+            setBodyCanvas(bodyList);
     };
 
+    const createCirclesCanvas = (orbits : Array<IOrbit>) => {
+        console.log("Orbits circle to draw", orbits);
+        const orbitList = orbits.filter(o => o.orbitType===0).map(
+            (orbit, key) => (
+                <DrawCanvasCircle 
+                width={width}
+                height={height}
+                color={orbitColor}
+                name={orbit.name}
+                centerX={orbit.center.x + OX}
+                centerY={OY - orbit.center.y}
+                radius={orbit.radius}
+                key={"Orbit" + key}
+                isFilled={false}
+                />
+        ));
+        setCirclesCanvas(orbitList);
+    }
+
     const createEllipsesCanvas = (orbits : Array<IOrbit>) => {
-        console.log("Orbits to draw", orbits);
+        console.log("Orbits elipses to draw", orbits);
         const orbitList = orbits.filter(o => o.orbitType===1).map(
             (orbit, key) => (
                 <DrawCanvasEllipse 
@@ -52,12 +73,10 @@ const Board = () => {
                 rotation={orbit.rotation}
                 />
             ));
-        console.log("Orbits list to draw", orbitList);
         setEllipsesCanvas(orbitList);
     }
 
     const createHyperbolaCanvas = (orbits : Array<IOrbit>) => {
-        console.log("Orbits hyperbola to draw", orbits);
         const orbitList = orbits.filter(o => o.orbitType===3).map(
             (orbit, key) => (
                 <DrawCanvasHyperbola 
@@ -73,13 +92,13 @@ const Board = () => {
                 rotation={orbit.rotation}
                 />
             ));
-        console.log("Orbits list to draw", orbitList);
         setHyperbolaCanvas(orbitList);
     }
 
     useEffect(() => {
         if (data !== null && data !== undefined) {
-            createCirclesCanvas(data.bodies);
+            createBodyCanvas(data.bodies);
+            createCirclesCanvas(data.orbits.filter(o => o.orbitType ===0));
             createEllipsesCanvas(data.orbits.filter(o => o.orbitType === 1));
             createHyperbolaCanvas(data.orbits.filter(o => o.orbitType === 3));
         }
@@ -87,9 +106,10 @@ const Board = () => {
 
     return (
         <div className="Board">
-            {circlesCanvas}
+            {bodyCanvas}
             {ellipsesCanvas}
             {hyperbolaCanvas}
+            {circlesCanvas}
         </div>
     )
 }

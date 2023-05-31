@@ -7,7 +7,8 @@ interface ICanvas {
     centerY: number,
 }
 declare interface ICanvasCircle extends ICanvas {
-    radius: number
+    radius: number,
+    isFilled: boolean
 }
 
 declare interface ICanvasEllipse extends ICanvas {

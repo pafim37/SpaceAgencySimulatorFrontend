@@ -18,7 +18,9 @@ const DrawCanvasCircle = (props : ICanvasCircle) => {
             ctx!.arc(props.centerX, props.centerY, props.radius, 0, 2 * Math.PI);
             ctx!.stroke();
             ctx.fillStyle = color;
-            ctx.fill();
+            if(props.isFilled) {
+                ctx.fill();
+            }
         }
     });
 

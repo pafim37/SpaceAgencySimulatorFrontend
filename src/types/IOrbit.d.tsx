@@ -8,5 +8,6 @@ declare interface IOrbit {
     center: IVector,
     semiMajorAxis: number,
     semiMinorAxis: number,
+    radius : number,
     rotation: number
 }
