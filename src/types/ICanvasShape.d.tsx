@@ -22,3 +22,7 @@ declare interface ICanvasHyperbola extends ICanvas {
     semiMinorAxis: number,
     rotation: number
 }
+
+declare interface ICanvasParabola extends ICanvas {
+    rotation: number
+}

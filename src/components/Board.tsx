@@ -4,6 +4,7 @@ import DrawCanvasCircle from './canvas/DrawCanvasCircle.tsx';
 import DrawCanvasEllipse from './canvas/DrawCanvasEllipse.tsx';
 import { DataContext } from './DataContextProvider';
 import DrawCanvasHyperbola from './canvas/DrawCanvasHyperbola.tsx';
+import DrawCanvasParabola from './canvas/DrawCanvasParabola.tsx';
 
 const Board = () => {
     const { data } = useContext(DataContext);
@@ -17,6 +18,7 @@ const Board = () => {
     const [ellipsesCanvas, setEllipsesCanvas] = useState([]);
     const [circlesCanvas, setCirclesCanvas] = useState([]);
     const [hyperbolaCanvas, setHyperbolaCanvas] = useState([]);
+    const [parabolaCanvas, setParabolaCanvas] = useState([]);
 
     const createBodyCanvas = (bodies : Array<IBody>) => {
         console.log("Bodies to draw", bodies);
@@ -95,12 +97,30 @@ const Board = () => {
         setHyperbolaCanvas(orbitList);
     }
 
+    const createParabolaCanvas = (orbits : Array<IOrbit>) => {
+        const orbitList = orbits.filter(o => o.orbitType===2).map(
+            (orbit, key) => (
+                <DrawCanvasParabola 
+                width={width}
+                height={height}
+                color={orbitColor}
+                key={key}
+                name={orbit.name + "_orbit1"}
+                centerX={orbit.center.x}
+                centerY={orbit.center.y}
+                rotation={orbit.rotation}
+                />
+            ));
+        setParabolaCanvas(orbitList);
+    }
+
     useEffect(() => {
         if (data !== null && data !== undefined) {
             createBodyCanvas(data.bodies);
             createCirclesCanvas(data.orbits.filter(o => o.orbitType ===0));
             createEllipsesCanvas(data.orbits.filter(o => o.orbitType === 1));
             createHyperbolaCanvas(data.orbits.filter(o => o.orbitType === 3));
+            createParabolaCanvas(data.orbits.filter(o => o.orbitType === 2));
         }
     }, [data]);
 
@@ -110,6 +130,7 @@ const Board = () => {
             {ellipsesCanvas}
             {hyperbolaCanvas}
             {circlesCanvas}
+            {parabolaCanvas}
         </div>
     )
 }
