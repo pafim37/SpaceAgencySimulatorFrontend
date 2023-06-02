@@ -2,6 +2,7 @@ import React, { useState, useContext }  from 'react';
 import BodySystemDescriptor from './BodySystemDescriptor';
 import axiosBase from '../axiosBase.jsx';
 import { DataContext } from './DataContextProvider';
+import '../styles/BodyListInfo.css';
 
 const BodyList = ({setShowedData}) => {
     const { data, setData } = useContext(DataContext);
@@ -29,7 +30,7 @@ const BodyList = ({setShowedData}) => {
     }
 
     return(
-        <>
+        <div>
             { data ? (
                 data.bodies.map(
                     (body, key) => (
@@ -44,7 +45,7 @@ const BodyList = ({setShowedData}) => {
                 <p>Loading data...</p>
             )
             }
-        </>
+        </div>
     );
 }
 

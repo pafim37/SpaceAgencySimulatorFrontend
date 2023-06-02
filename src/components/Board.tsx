@@ -5,6 +5,7 @@ import DrawCanvasEllipse from './canvas/DrawCanvasEllipse.tsx';
 import { DataContext } from './DataContextProvider';
 import DrawCanvasHyperbola from './canvas/DrawCanvasHyperbola.tsx';
 import DrawCanvasParabola from './canvas/DrawCanvasParabola.tsx';
+import DrawCanvasCross from './canvas/DrawCanvasCross.tsx';
 
 const Board = () => {
     const { data } = useContext(DataContext);
@@ -12,6 +13,7 @@ const Board = () => {
     const height : number = 480;
     const orbitColor : string = "#000099";
     const bodyColor : string = "#770000";
+    const crossColor : string = "#000000";
     const OX : number = 320;
     const OY : number = 240;
     const [bodyCanvas, setBodyCanvas] = useState([]);
@@ -41,7 +43,7 @@ const Board = () => {
 
     const createCirclesCanvas = (orbits : Array<IOrbit>) => {
         console.log("Orbits circle to draw", orbits);
-        const orbitList = orbits.filter(o => o.orbitType===0).map(
+        const orbitList = orbits.map(
             (orbit, key) => (
                 <DrawCanvasCircle 
                 width={width}
@@ -60,7 +62,7 @@ const Board = () => {
 
     const createEllipsesCanvas = (orbits : Array<IOrbit>) => {
         console.log("Orbits elipses to draw", orbits);
-        const orbitList = orbits.filter(o => o.orbitType===1).map(
+        const orbitList = orbits.map(
             (orbit, key) => (
                 <DrawCanvasEllipse 
                 width={width}
@@ -79,7 +81,7 @@ const Board = () => {
     }
 
     const createHyperbolaCanvas = (orbits : Array<IOrbit>) => {
-        const orbitList = orbits.filter(o => o.orbitType===3).map(
+        const orbitList = orbits.map(
             (orbit, key) => (
                 <DrawCanvasHyperbola 
                 width={width}
@@ -98,14 +100,14 @@ const Board = () => {
     }
 
     const createParabolaCanvas = (orbits : Array<IOrbit>) => {
-        const orbitList = orbits.filter(o => o.orbitType===2).map(
+        const orbitList = orbits.map(
             (orbit, key) => (
                 <DrawCanvasParabola 
                 width={width}
                 height={height}
                 color={orbitColor}
                 key={key}
-                name={orbit.name + "_orbit1"}
+                name={orbit.name + "_orbit1"} // TODO: fix keys
                 centerX={orbit.center.x}
                 centerY={orbit.center.y}
                 rotation={orbit.rotation}
@@ -114,13 +116,22 @@ const Board = () => {
         setParabolaCanvas(orbitList);
     }
 
+    const cross = <DrawCanvasCross 
+        width={width}
+        height={height}
+        color={crossColor}
+        name='cross'
+        centerX={OX}
+        centerY={OY}
+    />
+
     useEffect(() => {
         if (data !== null && data !== undefined) {
             createBodyCanvas(data.bodies);
-            createCirclesCanvas(data.orbits.filter(o => o.orbitType ===0));
-            createEllipsesCanvas(data.orbits.filter(o => o.orbitType === 1));
-            createHyperbolaCanvas(data.orbits.filter(o => o.orbitType === 3));
-            createParabolaCanvas(data.orbits.filter(o => o.orbitType === 2));
+            createEllipsesCanvas(data.orbits.filter(o => o.orbitType === 0));
+            createHyperbolaCanvas(data.orbits.filter(o => o.orbitType === 1));
+            createCirclesCanvas(data.orbits.filter(o => o.orbitType === 2));
+            createParabolaCanvas(data.orbits.filter(o => o.orbitType === 3));
         }
     }, [data]);
 
@@ -131,6 +142,7 @@ const Board = () => {
             {hyperbolaCanvas}
             {circlesCanvas}
             {parabolaCanvas}
+            {cross}
         </div>
     )
 }

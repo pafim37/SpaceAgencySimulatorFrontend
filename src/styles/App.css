@@ -1,12 +1,14 @@
 .App 
 {
     text-align: center;
-    background-color: #282c34;
+    /* background-color: #282c34; */
+    background: rgb(9,55,134);
+background: linear-gradient(135deg, rgba(9,55,134,1) 0%, rgba(12,3,94,1) 20%, rgba(0,0,0,1) 100%);
 }
 
 .App-header
 {
-    background-color: #171b23;
+    /* background-color: #171b23; */
     height: 10vh;
     margin: 0;
     display: flex;
@@ -32,15 +34,17 @@
 .App-footer 
 {
     height: 5vh;
-    background-color: #171b23;
+    /* background-color: #171b23; */
 }
 
 .App-right-panel
 {
     height: 100%;
+    max-height: 700px;
     flex-basis: 10%;
     margin-left: 10px;
     margin-right: 20px;
+    overflow-y: auto;
 }
 
 .App-left-panel
@@ -49,11 +53,8 @@
     flex-basis: 30%;
     margin-left: 10px;
     margin-right: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: -200px;
-    margin-left: -100px
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .App-center-panel

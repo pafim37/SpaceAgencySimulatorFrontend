@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 
 const initialData : IData = {
+  gravitationalConstant: 1,
   bodies: [],
   orbits: []
 };

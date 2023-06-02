@@ -11,10 +11,12 @@ const DataButtonGroup = ( {data , setData} : IDataProps)  => {
         axiosBase.get("body-system/")
             .then(response => {
             console.log("GET: Data response: ", response.data);
+            data.gravitationalConstant = response.data.gravitationalConstant;
             data.bodies = [...data.bodies, ...response.data.bodies];
             data.orbits = [...data.orbits, ...response.data.orbits];
             var uniqueBodies = data.bodies.filter( (body, ind) => ind === data.bodies.findIndex( bodyDuplicate => bodyDuplicate.name === body.name && bodyDuplicate.name === body.name))
             setData({
+                gravitationalConstant: data.gravitationalConstant,
                 bodies: uniqueBodies,
                 orbits: data.orbits
             });
