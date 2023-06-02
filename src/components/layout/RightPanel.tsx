@@ -1,10 +1,10 @@
 import React from 'react';
-import BodyList from '../BodyList.tsx';
+import BodyInfoList from '../BodyInfoList.tsx';
 
 const RightPanel = ({setShowedData}) => {
     return (
-        <div className="App-right-panel">
-            <BodyList setShowedData={setShowedData}/>
+        <div className="AppRightPanel">
+            <BodyInfoList setShowedData={setShowedData}/>
         </div>
       );
 }

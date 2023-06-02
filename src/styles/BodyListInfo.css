@@ -1,5 +1,6 @@
-.Body-List-Info
+.BodyListInfo
 {
     overflow-y: scroll;
+    overflow-x: hidden;
     height: 700px;
 }
