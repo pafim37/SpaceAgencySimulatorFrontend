@@ -1,0 +1,63 @@
+.AddNewBodyComponent
+{
+    margin-top: 10px;
+    color: rgb(48, 201, 176);
+    padding-bottom: 10px;
+    
+
+}
+
+.AddNewBodyComponent hr
+{
+    margin-top: -10px;
+}
+
+.DetailsGroup 
+{
+    justify-content: right;
+}
+
+.DetailsGroup h4
+{
+    display: flex;
+    align-items: right;
+}
+
+.DetailsGroup2 hr
+{
+    margin-top: 10px;
+}
+
+.LabelInputPair 
+{
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.LabelInputPair-Left
+{
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding-right: 5px;
+    width: 50%;
+}
+
+.LabelInputPair-Right
+{
+    font-size: 16px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    width: 50%;
+}
+
+.LabelInputPair input
+{
+    font-size: 20px;
+    width: 100%;
+    color: rgb(48, 201, 176);
+    background-color: #393d45;
+    width: 90%;
+}
