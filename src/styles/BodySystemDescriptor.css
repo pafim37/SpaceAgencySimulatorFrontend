@@ -7,4 +7,5 @@
 .BodyDescriptor:hover 
 {
     background-color: #393d45;
+    cursor: pointer;
 }

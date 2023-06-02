@@ -1,7 +1,13 @@
+/*
+ * IOrbit interface should be compatible with OrbitDTO.cs
+ */
+
 declare interface IOrbit {
     name: string,
-    centerX: number,
-    centerY: number,
+    orbitType: number,
+    center: IVector,
     semiMajorAxis: number,
-    semiMinorAxis: number
+    semiMinorAxis: number,
+    radius : number,
+    rotation: number
 }

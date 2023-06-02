@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import axios from "axios";
+import axiosBase from '../axiosBase';
 
 const DataButtonGroup = ( {data , setData} : IDataProps)  => {
     useEffect(() => {
@@ -8,18 +8,16 @@ const DataButtonGroup = ( {data , setData} : IDataProps)  => {
 
     const importData = async () => {
         console.log("Importing data from the database...");
-        const options = {
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            }
-        };
-        axios.get("http://localhost:5000/body-system/", options)
+        axiosBase.get("body-system/")
             .then(response => {
+            console.log("GET: Data response: ", response.data);
+            data.gravitationalConstant = response.data.gravitationalConstant;
             data.bodies = [...data.bodies, ...response.data.bodies];
-            data.orbits = [...data.orbits, ...response.data.orbitsDescription.map(o => o.orbit)];
+            data.orbits = [...data.orbits, ...response.data.orbits];
+            var uniqueBodies = data.bodies.filter( (body, ind) => ind === data.bodies.findIndex( bodyDuplicate => bodyDuplicate.name === body.name && bodyDuplicate.name === body.name))
             setData({
-                bodies: data.bodies,
+                gravitationalConstant: data.gravitationalConstant,
+                bodies: uniqueBodies,
                 orbits: data.orbits
             });
             response.status===200 && console.log("Data imported sucessfully");

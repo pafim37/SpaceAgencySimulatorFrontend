@@ -1,4 +1,5 @@
 declare interface IData {
+    gravitationalConstant: number,
     bodies: Array<IBody>,
     orbits: Array<IOrbit>
 }
