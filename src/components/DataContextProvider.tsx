@@ -39,11 +39,20 @@ export const DataContextProvider = ({ children }) => {
   }
 
   const getDataFromDatabase = async () => {
-    axiosBase.get("", { params : {gravitationalConstant: data.gravitationalConstant }})
+    let dataDb : IData = undefined as IData;
+    await axiosBase.get("", { params : {gravitationalConstant: data.gravitationalConstant }})
         .then(response => {
-        setData(response.data);
+          dataDb = response.data
     })
     .catch((error : Error)=> console.error(error));
+    const allBodies = [...dataDb.bodies, ...data.bodies];
+    var uniqueBodies = allBodies.filter( (body, index) => index === allBodies.findIndex( bodyDuplicate => bodyDuplicate.name === body.name && bodyDuplicate.name === body.name));
+    const newData : IData = {
+      gravitationalConstant: data.gravitationalConstant,
+      bodies: uniqueBodies,
+      orbits: [] // TODO: remove this
+    };
+    createBodySystem(newData);
   }; 
 
   const removeBody = async (name : string) => {
