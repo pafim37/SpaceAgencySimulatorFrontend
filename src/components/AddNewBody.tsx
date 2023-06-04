@@ -22,7 +22,7 @@ const AddNewBody = ({ showedData }) => {
         else {
             setButtonText("Update body");
         }
-    }, [inputValues.name]);
+    }, [inputValues.name, data]);
 
     const changeBodyPropertiesHandler = (event: any) => {
         event.preventDefault();
@@ -48,6 +48,11 @@ const AddNewBody = ({ showedData }) => {
         }
         else if (inputValues.velocity.x.toString() === "" || inputValues.velocity.y.toString() === "" || inputValues.velocity.z.toString() === "") {
             alert("Incorect velocity vector");
+            return false;
+        }
+        else if (data.bodies.some(body => body.position.x === inputValues.position.x && body.position.y === inputValues.position.y && body.position.z === inputValues.position.z))
+        {
+            alert("There is body in chosen position");
             return false;
         }
         else {
