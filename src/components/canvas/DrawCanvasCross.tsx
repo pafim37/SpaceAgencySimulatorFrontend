@@ -9,7 +9,6 @@ const DrawCanvasCross = (props : ICanvas) => {
   const size = 20;
 
   useEffect(() => {
-    console.log("Draw cross");
     const canvas = document.getElementById(props.name) as HTMLCanvasElement;
     if(canvas !== null) {
         canvas.width = width;

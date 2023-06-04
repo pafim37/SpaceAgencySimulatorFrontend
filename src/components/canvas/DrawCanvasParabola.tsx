@@ -9,7 +9,6 @@ const DrawCanvasParabola = (props : ICanvasParabola) => {
     const color = props.color;
 
     useEffect(() => {
-        console.log(OX, OY, width, height, color);
         const canvas = document.getElementById(props.name) as HTMLCanvasElement;
         
         if(canvas !== null) {
@@ -21,7 +20,6 @@ const DrawCanvasParabola = (props : ICanvasParabola) => {
             const a = 0;
             ctx!.beginPath();
             const ang = props.rotation + Math.PI / 2;
-            console.log("ang", ang);
             for (let x = -width / 2; x <= width / 2; x++) {
                 const y = a * x * x;
                 const xp = x * Math.cos(ang) - y * Math.sin(ang);
@@ -29,7 +27,6 @@ const DrawCanvasParabola = (props : ICanvasParabola) => {
                 ctx.lineTo(props.centerY + yp + OX, props.centerX + OY + xp);
             }
             ctx!.stroke();
-            console.log("DONE");
     }
   });
 

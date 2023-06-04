@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import '../styles/Board.css';
 import DrawCanvasCircle from './canvas/DrawCanvasCircle.tsx';
 import DrawCanvasEllipse from './canvas/DrawCanvasEllipse.tsx';
-import { DataContext } from './DataContextProvider';
+import DataContext from './DataContextProvider';
 import DrawCanvasHyperbola from './canvas/DrawCanvasHyperbola.tsx';
 import DrawCanvasParabola from './canvas/DrawCanvasParabola.tsx';
 import DrawCanvasCross from './canvas/DrawCanvasCross.tsx';
@@ -23,7 +23,6 @@ const Board = () => {
     const [parabolaCanvas, setParabolaCanvas] = useState([]);
 
     const createBodyCanvas = (bodies : Array<IBody>) => {
-        console.log("Bodies to draw", bodies);
         const bodyList = bodies.map(
             (body, key) => (
                 <DrawCanvasCircle 
@@ -42,7 +41,6 @@ const Board = () => {
     };
 
     const createCirclesCanvas = (orbits : Array<IOrbit>) => {
-        console.log("Orbits circle to draw", orbits);
         const orbitList = orbits.map(
             (orbit, key) => (
                 <DrawCanvasCircle 
@@ -61,7 +59,6 @@ const Board = () => {
     }
 
     const createEllipsesCanvas = (orbits : Array<IOrbit>) => {
-        console.log("Orbits elipses to draw", orbits);
         const orbitList = orbits.map(
             (orbit, key) => (
                 <DrawCanvasEllipse 

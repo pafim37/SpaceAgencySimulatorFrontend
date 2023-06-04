@@ -1,18 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react'
 import '../styles/LabelInputPair.css';
-import axiosBase from "../axiosBase.jsx";
-import { DataContext } from './DataContextProvider';
-
-type DataToSendType = {
-    gravitationalConstant: number,
-    bodies: Array<IBody>
-}
+import DataContext from './DataContextProvider.tsx';
 
 const AddNewBody = ({ showedData }) => {
-    const { data, setData } = useContext(DataContext);
+    const { data } = useContext(DataContext);
+    const { addOrUpdateBody } = useContext(DataContext);
     const [inputValues, setInputValues] = useState<IBody>(showedData);
     const [showedDataState, setShowedDataState] = useState<IBody>(showedData);
     const [buttonText, setButtonText] = useState("Add new body");
+
     useEffect(()=>{
         setShowedDataState(showedData);
         setInputValues(showedDataState);
@@ -24,32 +20,9 @@ const AddNewBody = ({ showedData }) => {
             setButtonText("Add new body");
         }
         else {
-            console.log("updated");
             setButtonText("Update body");
         }
-        console.log(inputValues.name, index);
-        
     }, [inputValues.name]);
-
-    const exportData = async(bodiesToSend : DataToSendType) => {
-        console.log("Exporting data to the database...", bodiesToSend);
-        console.log("Bodies to send", bodiesToSend);
-        axiosBase.post("body-system/", bodiesToSend)
-        .then(response => {
-            console.log("POST: data response:", response.data);
-            data.gravitationalConstant = response.data.gravitationalConstant
-            data.bodies = [...response.data.bodies];
-            data.orbits = [...response.data.orbits];
-            var uniqueBodies = data.bodies.filter( (body, index) => index === data.bodies.findIndex( bodyDuplicate => bodyDuplicate.name === body.name && bodyDuplicate.name === body.name))
-            setData({
-                gravitationalConstant: data.gravitationalConstant,
-                bodies: uniqueBodies,
-                orbits: data.orbits
-            });
-            response.status===200 && console.log("Data exported sucessfully")
-        })
-        .catch((err : Error)=> console.error(err));
-    }
 
     const changeBodyPropertiesHandler = (event: any) => {
         event.preventDefault();
@@ -57,7 +30,6 @@ const AddNewBody = ({ showedData }) => {
     }
 
     const validateInputValues = () => {
-        console.log(inputValues);
         if (inputValues.name === "") {
             alert("Name cannot be empty");
             return false;
@@ -99,41 +71,8 @@ const AddNewBody = ({ showedData }) => {
         event.preventDefault();
         const isValid = validateInputValues();
         if(isValid) {
-            updateBody();
-        }
-    }
-
-    const updateBody = () => {
-        const index = data.bodies.findIndex(b => b.name === inputValues.name);
-        if (index !== -1) {
-            const updatedBody : Array<IBody> = [...data.bodies];
-            updatedBody[index] = inputValues;
-            const newData : IData= {
-                gravitationalConstant: data.gravitationalConstant,
-                bodies: updatedBody,
-                orbits: data.orbits
-            }
-            setData(newData);
-
-            const dataToSend = {
-                gravitationalConstant: data.gravitationalConstant,
-                bodies: updatedBody
-            }
-            exportData(dataToSend);
-        }
-        else {
-            const updatedBody = [...data.bodies, inputValues];
-            const newData = {
-                gravitationalConstant: data.gravitationalConstant,
-                bodies: updatedBody,
-                orbits: data.orbits
-            }
-            setData(newData);
-            const dataToSend = {
-                gravitationalConstant: data.gravitationalConstant,
-                bodies: updatedBody
-            }
-            exportData(dataToSend);
+            addOrUpdateBody(inputValues);
+            setButtonText("Update body");
         }
     }
 

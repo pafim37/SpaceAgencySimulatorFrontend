@@ -10,7 +10,6 @@ const DrawCanvasHyperbola = (props : ICanvasHyperbola) => {
 
   useEffect(() => {
       const canvas = document.getElementById(props.name) as HTMLCanvasElement;
-      console.log("OX OY", OX, OY);
       if(canvas !== null) {
           canvas.width = width;
           canvas.height = height;

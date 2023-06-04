@@ -3,7 +3,7 @@ import '../../styles/App.css';
 import RightPanel from './RightPanel.tsx';
 import LeftPanel from './LeftPanel.tsx';
 import CenterPanel from './CenterPanel.tsx';
-import { DataContextProvider } from '../DataContextProvider'
+import { DataContextProvider } from '../DataContextProvider';
 
 const initialBody : IBody = {
     name: "",
