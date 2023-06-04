@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import { DataContext } from './DataContextProvider';
 const DataButtonGroup = ()  => {
-    const { synchronizeWithDatabase, saveDataInDatabase } = useContext(DataContext);
+    const { synchronizeWithDatabase, saveDataInDatabase, getDataFromDatabase } = useContext(DataContext);
 
     return(
         <div style={styleButtons}>
@@ -10,6 +10,9 @@ const DataButtonGroup = ()  => {
             </button>
             <button onClick={saveDataInDatabase}> 
                 Save
+            </button>
+            <button onClick={getDataFromDatabase}> 
+                Get
             </button>
         </div>
     );
