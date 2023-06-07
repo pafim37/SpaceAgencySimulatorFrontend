@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import '../styles/LabelInputPair.css';
-import { DataContext } from './DataContextProvider';
+import DataContext from './DataContextProvider';
 
 const GravitationalConstantForm = () => {
     const { data, setData } = useContext(DataContext);
