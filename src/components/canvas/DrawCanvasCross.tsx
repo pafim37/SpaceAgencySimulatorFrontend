@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import '../../styles/Canvas.css'
 
 const DrawCanvasCross = (props : ICanvas) => {
@@ -22,7 +22,7 @@ const DrawCanvasCross = (props : ICanvas) => {
         ctx.fillRect(props.centerX, props.centerY - size/2, lineWidth, size); // vertical
         ctx.fillRect(props.centerX - size/2, props.centerY, size, lineWidth); // horizontal
     }
-  }, []);
+  });
 
   return <canvas className='Canvas' id={props.name} />;
 };

@@ -1,0 +1,23 @@
+.GravitationalConstant 
+{
+    font-size: 20px;
+    color: rgb(48, 201, 176);
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.GravitationalConstant-Label
+{
+    width: 40%;
+}
+
+.GravitationalConstant-Input
+{
+    width: 20%;
+}
+
+.GravitationalConstant-Button
+{
+    width: 40%;
+}

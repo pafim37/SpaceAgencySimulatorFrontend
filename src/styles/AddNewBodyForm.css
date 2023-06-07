@@ -1,0 +1,32 @@
+.AddNewBodyForm
+{
+    color: rgb(48, 201, 176);
+}
+
+input
+{
+    font-size: 20px;
+    width: 100%;
+    color: rgb(48, 201, 176);
+    background-color: #393d45;
+    margin: 1px;
+}
+
+.LabelInputPair 
+{
+    font-size: 20px;
+    display: flex;
+    align-items: right;
+}
+
+.LabelInputPair-Label
+{
+    width: 25%;
+    display: flex;
+}
+
+.LabelInputPair-Input
+{
+    width: 75%;
+    display: flex;
+}
