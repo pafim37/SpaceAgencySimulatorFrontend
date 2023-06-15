@@ -12,10 +12,11 @@ const BodyInfoList = ({setShowedData}) => {
             {data.bodies.map(
                 (body, key) => (
                     <BodyInfo
-                    key={key} 
-                    body={body} 
-                    removeBody={removeBody}
-                    setShowedData={setShowedData}/>
+                        key={key} 
+                        body={body} 
+                        removeBody={removeBody}
+                        setShowedData={setShowedData}
+                    />
             ))}
         </div>
     );

@@ -66,8 +66,8 @@ const Board = () => {
                 height={height}
                 color={orbitColor}
                 key={key}
-                name={orbit.name + "_orbit"}
-                centerX={OX - orbit.center.x}
+                name={"Orbit" + orbit.name + key }
+                centerX={orbit.center.x + OX}
                 centerY={OY - orbit.center.y}
                 semiMajorAxis={orbit.semiMajorAxis}
                 semiMinorAxis={orbit.semiMinorAxis}
@@ -85,7 +85,7 @@ const Board = () => {
                 height={height}
                 color={orbitColor}
                 key={key}
-                name={orbit.name + "_orbit"}
+                name={"Orbit" + orbit.name + key}
                 centerX={orbit.center.x}
                 centerY={orbit.center.y}
                 semiMajorAxis={orbit.semiMajorAxis}
@@ -104,7 +104,7 @@ const Board = () => {
                 height={height}
                 color={orbitColor}
                 key={key}
-                name={orbit.name + "_orbit1"} // TODO: fix keys
+                name={"Orbit" + orbit.name + key}
                 centerX={orbit.center.x}
                 centerY={orbit.center.y}
                 rotation={orbit.rotation}
