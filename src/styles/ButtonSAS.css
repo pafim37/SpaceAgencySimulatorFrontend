@@ -1,0 +1,14 @@
+.ButtonSAS
+{
+    width: 150px;
+    height: 30px;
+    margin: 5px;
+    border-radius: 25px;
+    background-color: #393d45;
+    color: rgb(48, 201, 176);
+}
+
+.ButtonSAS:hover 
+{
+    background-color: #4a4e56;
+}

@@ -1,18 +1,20 @@
 import React, {useContext} from 'react';
 import { DataContext } from './DataContextProvider';
+import '../styles/ButtonSAS.css';
+
 const DataButtonGroup = ()  => {
     const { synchronizeWithDatabase, saveDataInDatabase, getDataFromDatabase } = useContext(DataContext);
 
     return(
         <div style={styleButtons}>
-            <button onClick={synchronizeWithDatabase}> 
-                Synchronize with DB
-            </button>
-            <button onClick={saveDataInDatabase}> 
+            <button className="ButtonSAS" onClick={saveDataInDatabase}> 
                 Save
             </button>
-            <button onClick={getDataFromDatabase}> 
-                Get
+            <button className="ButtonSAS" onClick={getDataFromDatabase}> 
+                Download
+            </button>
+            <button className="ButtonSAS" onClick={synchronizeWithDatabase}> 
+                Synchronize
             </button>
         </div>
     );

@@ -15,6 +15,7 @@ type DataContextType = {
   saveDataInDatabase: () => void;
   synchronizeWithDatabase: () => void;
   getDataFromDatabase: () => void;
+  createBodySystem: (props : number) => void;
 }
 
 export const DataContext = React.createContext<DataContextType>({} as DataContextType);
@@ -52,7 +53,7 @@ export const DataContextProvider = ({ children }) => {
       bodies: uniqueBodies,
       orbits: [] // TODO: remove this
     };
-    createBodySystem(newData);
+    createBodySystemRequest(newData);
   }; 
 
   const removeBody = async (name : string) => {
@@ -62,7 +63,7 @@ export const DataContextProvider = ({ children }) => {
       bodies: newBodies,
       orbits: [...data.orbits]
     };
-    createBodySystem(newData);
+    createBodySystemRequest(newData);
   }
 
   const addOrUpdateBody = (newBody : IBody) => {
@@ -85,19 +86,24 @@ export const DataContextProvider = ({ children }) => {
         orbits: data.orbits
       }
     }
-    createBodySystem(newData);
+    createBodySystemRequest(newData);
   }
 
-  const createBodySystem = (newData : IData) => {
+  const createBodySystemRequest = (newData : IData) => {
     axiosBase.post("create", newData)
     .then(response => {
       setData(response.data);
     })
-    .catch((err : Error)=> console.error(err));
+    .catch((error : Error)=> console.error(error));
+  }
+
+  const createBodySystem = (gravitationalConstant : number) => {
+    const newData : IData = {...data, gravitationalConstant: gravitationalConstant};
+    createBodySystemRequest(newData);
   }
 
   return (
-    <DataContext.Provider value={{ data, setData, getDataFromDatabase, removeBody, addOrUpdateBody, saveDataInDatabase, synchronizeWithDatabase }}>
+    <DataContext.Provider value={{ data, setData, getDataFromDatabase, createBodySystem, removeBody, addOrUpdateBody, saveDataInDatabase, synchronizeWithDatabase }}>
       {children}
     </DataContext.Provider>
   );

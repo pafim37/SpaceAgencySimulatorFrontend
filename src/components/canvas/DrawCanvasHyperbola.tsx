@@ -23,7 +23,7 @@ const DrawCanvasHyperbola = (props : ICanvasHyperbola) => {
   });
 
   const drawHyperbola = (ctx : CanvasRenderingContext2D) => {
-      const step = 0.1;
+      const step = 0.01;
       const startParameter = - 2 * Math.PI;
       const endParameter = 2 * Math.PI;
 

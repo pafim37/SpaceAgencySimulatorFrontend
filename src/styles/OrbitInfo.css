@@ -1,0 +1,33 @@
+.OrbitInfo
+{
+    text-align: "left";
+    color: #30c9b0;
+    border: 1px solid white;
+    border-radius: 25px;
+    position: relative;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-right: 15px;
+    padding: 5px;
+}
+
+.OrbitInfo:hover 
+{
+    background-color: #393d45;
+    cursor: pointer;
+}
+
+.RemoveOrbitInfoButton
+{
+    height: 30px;
+    width: 30px;
+    background-color: #ff5050;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
