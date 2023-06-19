@@ -6,10 +6,6 @@ import '../styles/OrbitListInfo.css';
 const OrbitInfoList = () => {
     const { data } = useContext(DataContext);
 
-    useEffect(() => {
-        console.log("orbits: ", data.orbits);
-    });
-
     return(
         <div>
             {data.orbits.map(
